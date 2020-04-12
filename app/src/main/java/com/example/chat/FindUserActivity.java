@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.telephony.TelephonyManager;
 
+import com.example.chat.User.UserListAdapter;
+import com.example.chat.User.UserObject;
+import com.example.chat.Utils.CountryToPhonePrefix;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -59,7 +62,7 @@ public class FindUserActivity extends AppCompatActivity {
             if(!String.valueOf(phone.charAt(0)).equals("+"))
                 phone = ISOPrefix + phone;
 
-            UserObject mContact = new UserObject(name,phone);
+            UserObject mContact = new UserObject("",name,phone);
             contactList.add(mContact);
             getUserDetails(mContact);
         }
@@ -83,7 +86,7 @@ public class FindUserActivity extends AppCompatActivity {
                             name = childSnapshots.child("name").getValue().toString();
                         }
 
-                        UserObject mUser = new UserObject(name,phone);
+                        UserObject mUser = new UserObject(childSnapshots.getKey(),name,phone);
                         if(name.equals(phone)){
                             for(UserObject mContactIterator: contactList){
                                 if(mContactIterator.getPhone().equals(mUser.getPhone())){
