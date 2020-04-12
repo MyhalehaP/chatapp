@@ -66,7 +66,7 @@ public class FindUserActivity extends AppCompatActivity {
 
     }
 
-    private void getUserDetails(UserObject mContact) {
+    private void getUserDetails(final UserObject mContact) {
 
         DatabaseReference mUserDB = FirebaseDatabase.getInstance().getReference().child("user");
         Query query = mUserDB.orderByChild("phone").equalTo(mContact.getPhone());
@@ -84,6 +84,16 @@ public class FindUserActivity extends AppCompatActivity {
                         }
 
                         UserObject mUser = new UserObject(name,phone);
+                        if(name.equals(phone)){
+                            for(UserObject mContactIterator: contactList){
+                                if(mContactIterator.getPhone().equals(mUser.getPhone())){
+                                    mUser.setName(mContactIterator.getName());
+
+                                }
+                            }
+                        }
+
+
                         userList.add(mUser);
                         mUserListAdapter.notifyDataSetChanged();
                         return;
