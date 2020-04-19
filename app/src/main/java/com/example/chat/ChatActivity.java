@@ -81,6 +81,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 if(dataSnapshot.exists()){
                     String text = "test", creatorID = "test";
+                    ArrayList<String> mediaUrlList = new ArrayList<>();
 
                     if(dataSnapshot.child("text").getValue() != null)
                         text = dataSnapshot.child("text").getValue().toString();
@@ -88,8 +89,11 @@ public class ChatActivity extends AppCompatActivity {
                     if(dataSnapshot.child("creator").getValue() != null)
                         creatorID = dataSnapshot.child("creator").getValue().toString();
 
+                    if(dataSnapshot.child("media").getChildrenCount() > 0)
+                        for(DataSnapshot mediaSnap: dataSnapshot.child("media").getChildren())
+                            mediaUrlList.add(mediaSnap.getValue().toString());
 
-                    MessageObject mMessage = new MessageObject(dataSnapshot.getKey(),creatorID,text);
+                    MessageObject mMessage = new MessageObject(dataSnapshot.getKey(),creatorID,text,mediaUrlList);
                     messageList.add(mMessage);
 
                     mChatLayoutManager.scrollToPosition(messageList.size()-1);
@@ -174,7 +178,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void UpdateDatabaseWithNewMessage(DatabaseReference newMessageDb, Map newMessageMap){
         newMessageDb.updateChildren(newMessageMap);
-        mMessage.setText(null);
+        mMessage.setText("");
         mediaIdList.clear();
         mediaUriList.clear();
         mMediaAdapter.notifyDataSetChanged();

@@ -16,6 +16,9 @@ import com.example.chat.Chat.ChatListAdapter;
 import com.example.chat.Chat.ChatObject;
 import com.example.chat.User.UserListAdapter;
 import com.example.chat.User.UserObject;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,7 +39,12 @@ public class MainPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-
+        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
+                .setProgressiveJpegConfig(new SimpleProgressiveJpegConfig())
+                .setResizeAndRotateEnabledForNetwork(true)
+                .setDownsampleEnabled(true)
+                .build();
+        Fresco.initialize(this, config);
         mLogOut = findViewById(R.id.logout);
         mFindUser = findViewById(R.id.findUser);
 
