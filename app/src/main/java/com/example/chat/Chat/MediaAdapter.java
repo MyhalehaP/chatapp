@@ -19,8 +19,8 @@ import java.util.ArrayList;
 
 public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHolder> {
 
-    ArrayList<String> mediaList;
-    Context context;
+    private ArrayList<String> mediaList;
+    private Context context;
 
     public MediaAdapter(Context context, ArrayList<String> mediaList){
         this.context = context;

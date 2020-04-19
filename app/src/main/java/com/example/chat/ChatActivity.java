@@ -85,8 +85,10 @@ public class ChatActivity extends AppCompatActivity {
 
                     MessageObject mMessage = new MessageObject(dataSnapshot.getKey(),creatorID,text);
                     messageList.add(mMessage);
+
                     mChatLayoutManager.scrollToPosition(messageList.size()-1);
                     mChatAdapter.notifyDataSetChanged();
+
 
                 }
             }
@@ -149,7 +151,6 @@ public class ChatActivity extends AppCompatActivity {
     ArrayList<String> mediaUriList = new ArrayList<>();
 
     private void initializeMedia() {
-        messageList = new ArrayList<>();
         mMedia = findViewById(R.id.mediaList);
         mMedia.setNestedScrollingEnabled(false);
         mMedia.setHasFixedSize(false);

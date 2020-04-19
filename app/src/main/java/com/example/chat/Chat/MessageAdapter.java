@@ -1,5 +1,6 @@
 package com.example.chat.Chat;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
-    ArrayList<MessageObject> messageList = new ArrayList<>();
+    private ArrayList<MessageObject> messageList;
 
     public MessageAdapter(ArrayList<MessageObject> messageList){
         this.messageList = messageList;
@@ -33,9 +34,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutView.setLayoutParams(lp);
 
-        MessageViewHolder rcv = new MessageViewHolder(layoutView);
-
-        return rcv;
+        return new MessageViewHolder(layoutView);
     }
 
     @Override
@@ -47,8 +46,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     @Override
     public int getItemCount() {
-
+        Log.d("------>>>> ML Size: ", String.valueOf(messageList.size()));
         return messageList.size();
+
     }
 
 
