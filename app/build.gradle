@@ -1,3 +1,18 @@
+
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/'}
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:0.12.6'
+    }
+}
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+
+repositories {
+    maven { url 'https://maven.google.com' }
+}
+
 apply plugin: 'com.android.application'
 
 android {
@@ -9,6 +24,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [
+                onesignal_app_id: 'c79c9a9f-a475-4f0e-a5c6-66a805415e12',
+                // Project number pulled from dashboard, local value is ignored.
+                onesignal_google_project_number: 'REMOTE'
+        ]
     }
     buildTypes {
         release {
@@ -33,6 +53,7 @@ dependencies {
     implementation 'com.github.stfalcon:frescoimageviewer:0.5.0'
     implementation 'com.facebook.fresco:fresco:2.2.0'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'com.onesignal:OneSignal:[3.13.0, 3.99.99]'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
 }

@@ -59,7 +59,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     @Override
     public int getItemCount() {
-        Log.d("------>>>> ML Size: ", String.valueOf(messageList.size()));
+
         return messageList.size();
 
     }

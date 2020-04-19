@@ -1,7 +1,13 @@
 package com.example.chat.User;
 
-public class UserObject {
-    private String name,phone,uid;
+import java.io.Serializable;
+
+public class UserObject implements Serializable {
+    private String name,phone,uid, notificationKey;
+
+    public UserObject(String uid){
+        this.uid = uid;
+    }
 
     public UserObject(String uid,String name, String phone){
         this.name = name;
@@ -19,6 +25,13 @@ public class UserObject {
         return phone;
     }
 
+    public String getNotificationKey() {
+        return notificationKey;
+    }
+
+    public void setNotificationKey(String notificationKey) {
+        this.notificationKey = notificationKey;
+    }
 
     public void setName(String name) {
         this.name = name;
