@@ -7,11 +7,7 @@
     tools:context=".FindUserActivity"
     android:orientation="vertical">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/create"
-        android:text="Create chat"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -21,4 +17,9 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/create"
+        android:text="Create chat"/>
 </LinearLayout>

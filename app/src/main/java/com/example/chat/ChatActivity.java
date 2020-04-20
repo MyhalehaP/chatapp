@@ -147,6 +147,9 @@ public class ChatActivity extends AppCompatActivity {
 
             newMessageMap.put("creator", FirebaseAuth.getInstance().getUid());
 
+            String name = "";
+
+
             if(!mediaUriList.isEmpty()){
                 for(String mediaUri: mediaUriList){
                     String mediaId = newMessageDB.child("media").push().getKey();
@@ -197,7 +200,7 @@ public class ChatActivity extends AppCompatActivity {
         for(UserObject mUser: mChatObject.getUserObjectArrayList()){
             if(!mUser.getUid().equals(FirebaseAuth.getInstance().getUid())) {
                 try {
-                    new SendNotification(message, "New Message",mUser.getNotificationKey());
+                    new SendNotification(message, mUser.getName() ,mUser.getNotificationKey());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

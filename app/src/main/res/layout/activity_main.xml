@@ -11,9 +11,15 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:hint="Your name"
+        android:id="@+id/name"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:hint="Enter phone number"
         android:id="@+id/phoneNumber"
-
         />
 
     <EditText

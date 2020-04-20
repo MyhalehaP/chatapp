@@ -1,19 +1,27 @@
 package com.example.chat.User;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class UserObject implements Serializable {
     private String name,phone,uid, notificationKey;
+    private ArrayList<String> names;
 
     private boolean selected = false;
+
+    public UserObject(String uid, ArrayList<String> names){
+        this.uid = uid;
+        this.names = names;
+    }
+
     public UserObject(String uid){
         this.uid = uid;
     }
 
     public UserObject(String uid,String name, String phone){
+        this.uid = uid;
         this.name = name;
         this.phone = phone;
-        this.uid = uid;
     }
 
     public String getUid(){ return uid; }
@@ -44,6 +52,10 @@ public class UserObject implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ArrayList<String> getNames() {
+        return names;
     }
 }
 

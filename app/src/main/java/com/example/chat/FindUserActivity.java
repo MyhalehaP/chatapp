@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -50,8 +51,10 @@ public class FindUserActivity extends AppCompatActivity {
         });
         initializeRecyclerView();
         getContactList();
+        getMyself();
 
     }
+
 
     private void createChat(){
         String key = FirebaseDatabase.getInstance().getReference().child("chat").push().getKey();
@@ -67,9 +70,15 @@ public class FindUserActivity extends AppCompatActivity {
         boolean validChat = false;
 
         for(UserObject mUser: userList){
+            if(mUser.getUid().equals(FirebaseAuth.getInstance().getUid())){
+                newChatMap.put("names/" + mUser.getName(),true);
+
+            }
+
             if(mUser.getSelected()){
                 validChat = true;
                 newChatMap.put("users/" + mUser.getUid(),true);
+                newChatMap.put("names/"+mUser.getName(),true);
                 userDb.child(mUser.getUid()).child("chat").child(key).setValue(true);
             }
         }
@@ -106,6 +115,40 @@ public class FindUserActivity extends AppCompatActivity {
 
     }
 
+
+    private void getMyself() {
+        DatabaseReference mUserDB = FirebaseDatabase.getInstance().getReference().child("user");
+
+        mUserDB.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    String phone = "", name = "";
+                    String me = FirebaseAuth.getInstance().getUid();
+
+                    for(DataSnapshot childSnap : dataSnapshot.getChildren()){
+                        if(childSnap.getKey().equals(me)){
+                            if(childSnap.child("phone").getValue() != null){
+                                phone = childSnap.child("phone").getValue().toString();
+                            }
+                            if(childSnap.child("name").getValue() != null){
+                                name = childSnap.child("name").getValue().toString();
+                            }
+
+                            UserObject mUser = new UserObject(childSnap.getKey(),name,phone);
+                            userList.add(mUser);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void getUserDetails(final UserObject mContact) {
 
         DatabaseReference mUserDB = FirebaseDatabase.getInstance().getReference().child("user");
@@ -124,6 +167,7 @@ public class FindUserActivity extends AppCompatActivity {
                         }
 
                         UserObject mUser = new UserObject(childSnapshots.getKey(),name,phone);
+
                         if(name.equals(phone)){
                             for(UserObject mContactIterator: contactList){
                                 if(mContactIterator.getPhone().equals(mUser.getPhone())){
