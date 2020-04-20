@@ -28,6 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -36,13 +37,16 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class ChatActivity extends AppCompatActivity {
 
     private RecyclerView mChat, mMedia;
     private RecyclerView.Adapter mChatAdapter, mMediaAdapter;
     private RecyclerView.LayoutManager mChatLayoutManager, mMediaLayoutManager;
+    String myName = "";
     ChatObject mChatObject;
     DatabaseReference mChatMessagesDb;
     ArrayList<MessageObject> messageList;
@@ -74,10 +78,37 @@ public class ChatActivity extends AppCompatActivity {
 
         initializeMessage();
         initializeMedia();
+        getMyself();
         getChatMessages();
 
     }
 
+    private void getMyself() {
+        DatabaseReference mUserDB = FirebaseDatabase.getInstance().getReference().child("user");
+
+        mUserDB.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    String me = FirebaseAuth.getInstance().getUid();
+
+                    for(DataSnapshot childSnap : dataSnapshot.getChildren()){
+                        if(childSnap.getKey().equals(me)){
+                            if(childSnap.child("name").getValue() != null){
+                                myName = childSnap.child("name").getValue().toString();
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 
     private void getChatMessages() {
@@ -85,11 +116,14 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 if(dataSnapshot.exists()){
-                    String text = "", creatorID = "";
+                    String text = "", creatorID = "", senderName = "";
                     ArrayList<String> mediaUrlList = new ArrayList<>();
 
                     if(dataSnapshot.child("text").getValue() != null)
                         text = dataSnapshot.child("text").getValue().toString();
+
+                    if(dataSnapshot.child("name").getValue() != null)
+                        senderName = dataSnapshot.child("name").getValue().toString();
 
                     if(dataSnapshot.child("creator").getValue() != null)
                         creatorID = dataSnapshot.child("creator").getValue().toString();
@@ -98,7 +132,7 @@ public class ChatActivity extends AppCompatActivity {
                         for(DataSnapshot mediaSnap: dataSnapshot.child("media").getChildren())
                             mediaUrlList.add(mediaSnap.getValue().toString());
 
-                    MessageObject mMessage = new MessageObject(dataSnapshot.getKey(),creatorID,text,mediaUrlList);
+                    MessageObject mMessage = new MessageObject(dataSnapshot.getKey(),creatorID,senderName,text,mediaUrlList);
                     messageList.add(mMessage);
 
                     mChatLayoutManager.scrollToPosition(messageList.size()-1);
@@ -146,9 +180,7 @@ public class ChatActivity extends AppCompatActivity {
                 newMessageMap.put("text",mMessage.getText().toString());
 
             newMessageMap.put("creator", FirebaseAuth.getInstance().getUid());
-
-            String name = "";
-
+            newMessageMap.put("name",myName);
 
             if(!mediaUriList.isEmpty()){
                 for(String mediaUri: mediaUriList){
@@ -166,8 +198,10 @@ public class ChatActivity extends AppCompatActivity {
                                     newMessageMap.put("/media/" + mediaIdList.get(totalMediaUploaded) + "/",uri.toString());
                                     totalMediaUploaded++;
 
-                                    if(totalMediaUploaded == mediaUriList.size())
+                                    if(totalMediaUploaded == mediaUriList.size()){
                                         UpdateDatabaseWithNewMessage(newMessageDB,newMessageMap);
+                                    }
+
 
                                 }
                             });
@@ -186,10 +220,11 @@ public class ChatActivity extends AppCompatActivity {
 
     private void UpdateDatabaseWithNewMessage(DatabaseReference newMessageDb, Map newMessageMap){
         newMessageDb.updateChildren(newMessageMap);
+
         mMessage.setText("");
         mediaIdList.clear();
         mediaUriList.clear();
-        mMediaAdapter.notifyDataSetChanged();
+
         String message;
 
         if(newMessageMap.get("text")!= null)
@@ -207,6 +242,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         }
 
+        mMediaAdapter.notifyDataSetChanged();
     }
 
     private void initializeMessage() {

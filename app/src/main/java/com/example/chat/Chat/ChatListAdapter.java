@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.security.AlgorithmParameterGenerator;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatListViewHolder> {
     ArrayList<ChatObject> chatList = new ArrayList<>();
@@ -66,14 +68,17 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
 
     @Override
     public void onBindViewHolder(@NonNull final ChatListViewHolder holder, final int position) {
-
+        
         StringBuilder title_bld = new StringBuilder();
         String title = "";
         boolean check = false;
 
         ArrayList<UserObject> User = chatList.get(position).getUserObjectArrayList();
         ArrayList<String> str = User.get(0).getNames();
-
+        Arrays.sort(str.toArray());
+        for (String s : str) {
+            Log.d("-----------", s);
+        }
         if (str.size() > 2) check = true;
 
         if(!check){

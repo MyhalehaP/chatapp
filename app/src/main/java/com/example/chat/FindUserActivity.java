@@ -125,30 +125,30 @@ public class FindUserActivity extends AppCompatActivity {
 
 
     private void getMyself() {
-        DatabaseReference mUserDB = FirebaseDatabase.getInstance().getReference().child("user");
+                DatabaseReference mUserDB = FirebaseDatabase.getInstance().getReference().child("user");
 
-        mUserDB.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    String phone = "", name = "";
-                    String me = FirebaseAuth.getInstance().getUid();
+                mUserDB.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            String phone = "", name = "";
+                            String me = FirebaseAuth.getInstance().getUid();
 
-                    for(DataSnapshot childSnap : dataSnapshot.getChildren()){
-                        if(childSnap.getKey().equals(me)){
-                            if(childSnap.child("phone").getValue() != null){
-                                phone = childSnap.child("phone").getValue().toString();
+                            for(DataSnapshot childSnap : dataSnapshot.getChildren()){
+                                if(childSnap.getKey().equals(me)){
+                                    if(childSnap.child("phone").getValue() != null){
+                                        phone = childSnap.child("phone").getValue().toString();
+                                    }
+                                    if(childSnap.child("name").getValue() != null){
+                                        name = childSnap.child("name").getValue().toString();
+                                    }
+
+                                    UserObject mUser = new UserObject(childSnap.getKey(),name,phone);
+                                    userList.add(mUser);
+                                }
                             }
-                            if(childSnap.child("name").getValue() != null){
-                                name = childSnap.child("name").getValue().toString();
-                            }
-
-                            UserObject mUser = new UserObject(childSnap.getKey(),name,phone);
-                            userList.add(mUser);
                         }
                     }
-                }
-            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
