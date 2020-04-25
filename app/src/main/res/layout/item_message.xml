@@ -31,10 +31,10 @@
             android:textColor="@color/white"
             android:background="@drawable/gradients"
             android:id="@+id/viewMedia"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#122142"/>
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:background="#122142"/>-->
 
         <TextView
             android:id="@+id/sender"
