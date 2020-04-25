@@ -27,7 +27,6 @@
         android:layout_height="wrap_content"
         android:hint="Enter code"
         android:id="@+id/code"
-
         />
 
     <Button
