@@ -21,7 +21,8 @@
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/custom_edit_text"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/blue"
+        android:textColor="@color/white"
         android:hint="@string/your_name"
         android:id="@+id/name"
         />
@@ -34,7 +35,8 @@
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/custom_edit_text"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/blue"
+        android:textColor="@color/white"
         android:hint="@string/enter_phone_number"
         android:id="@+id/phoneNumber"
         />
@@ -47,7 +49,8 @@
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/custom_edit_text"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/blue"
+        android:textColor="@color/white"
         android:hint="@string/enter_code"
         android:id="@+id/code"
 
