@@ -10,6 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/messageList"
+        android:paddingTop="0dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_above="@+id/sendLayout"/>
 
     <LinearLayout
@@ -49,7 +53,7 @@
                 android:id="@+id/new_message"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
-                android:padding="4dp"
+                android:padding="6dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:textColor="@color/black"
