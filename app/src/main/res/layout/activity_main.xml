@@ -5,35 +5,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
-    android:orientation="vertical">
+    android:background="@color/colorPrimaryBg"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingLeft="50dip"
+    android:paddingRight="50dip">
+    >
 
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Your name"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:text="@string/your_name"
         android:id="@+id/name"
         />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter phone number"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:text="@string/enter_phone_number"
         android:id="@+id/phoneNumber"
         />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter code"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:text="@string/enter_code"
         android:id="@+id/code"
 
         />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Get Verification Code"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/gradients"
+        android:textColor="@color/white"
+        android:text="@string/get_verification_code"
         android:id="@+id/send"/>
 
 
