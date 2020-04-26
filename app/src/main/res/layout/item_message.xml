@@ -15,27 +15,32 @@
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/gradients"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:padding="10dp"
             app:layout_constraintBottom_toTopOf="@+id/sender"
             tools:ignore="MissingConstraints" />
 
-
-
-        
-
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="50sp"
-            android:text="View media"
+            android:layout_width="125dp"
+            android:layout_height="40sp"
+            android:text="@string/view_media"
+            android:textColor="@color/white"
+            android:background="@drawable/gradients"
             android:id="@+id/viewMedia"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#122142"/>
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:background="#122142"/>-->
 
         <TextView
             android:id="@+id/sender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             />
 

@@ -4,4 +4,10 @@
     <string name="enter_code">Enter code</string>
     <string name="enter_phone_number">Enter phone number</string>
     <string name="your_name">Your name</string>
+    <string name="find_user">Find user</string>
+    <string name="log_out">LOG OUT</string>
+    <string name="media">Media</string>
+    <string name="send">Send</string>
+    <string name="press_to_type">Press to type</string>
+    <string name="view_media">View media</string>
 </resources>

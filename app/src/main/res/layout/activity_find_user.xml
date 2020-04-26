@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@color/colorPrimaryBg"
     tools:context=".FindUserActivity"
     android:orientation="vertical">
 
@@ -12,6 +14,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="40dp"
         android:id="@+id/userList"
         android:scrollbars="vertical">
 
@@ -20,6 +24,9 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:background="@drawable/gradients"
+        android:textColor="@color/white"
         android:id="@+id/create"
         android:text="Create chat"/>
 </LinearLayout>

@@ -4,8 +4,7 @@
     android:thickness="0dp"
     >
 
-    <stroke
-        android:width="0.7dp"
+    <solid
         android:color="@color/white"
         />
 

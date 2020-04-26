@@ -10,6 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/messageList"
+        android:paddingTop="0dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_above="@+id/sendLayout"/>
 
     <LinearLayout
@@ -29,26 +33,41 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/gradients"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:padding="12dp"
                 android:orientation="horizontal">
 
-            <EditText
-                android:layout_weight="0.8"
-                 android:layout_width="0dp"
-                 android:layout_height="wrap_content"
-                android:id="@+id/new_message"
-                android:hint="Press to type"
-                />
             <Button
-                android:layout_weight="0.2"
+                android:layout_weight="0.15"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Media"
+                android:layout_height="35dp"
+                android:background="@drawable/contact_item"
+                android:textSize="12dp"
+                android:text="@string/media"
                 android:id="@+id/addMedia"/>
-            <Button
-                android:layout_weight="0.2"
+            <EditText
+                android:id="@+id/new_message"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Send"
+                android:layout_height="35dp"
+                android:padding="6dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:background="@drawable/contact_item"
+                android:layout_weight="0.6"
+                android:hint="@string/press_to_type" />
+            <Button
+                android:layout_weight="0.15"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:textSize="12dp"
+                android:background="@drawable/contact_item"
+                android:text="@string/send"
                 android:id="@+id/send_message"/>
             </LinearLayout>
 
