@@ -70,32 +70,26 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
     public void onBindViewHolder(@NonNull final ChatListViewHolder holder, final int position) {
         
         StringBuilder title_bld = new StringBuilder();
-        String title = "";
-        boolean check = false;
 
         ArrayList<UserObject> User = chatList.get(position).getUserObjectArrayList();
-        ArrayList<String> str = User.get(0).getNames();
-        Arrays.sort(str.toArray());
-        for (String s : str) {
-            Log.d("-----------", s);
-        }
-        if (str.size() > 2) check = true;
+        ArrayList<String> str = new ArrayList<>();
 
-        if(!check){
-            if(str.get(0).equals(myName))title = str.get(1);
-            else title = str.get(0);
+        for(UserObject s : User){
+            if(!s.getNames().isEmpty()){
+                str = s.getNames();
+                break;
+            }
         }
 
-        if(check)
             for (String s : str) {
             title_bld.append(s);
             title_bld.append(", ");
             }
 
-        if(check)title_bld.delete(title_bld.length()-2,title_bld.length()-1);
-
-        if(!check)holder.mTitle.setText(title);
-        else holder.mTitle.setText(title_bld.toString());
+            if(str.size()> 1){
+                title_bld.delete(title_bld.length()-2,title_bld.length()-1);
+            }
+        holder.mTitle.setText(title_bld.toString());
 
         holder.mLayout.setOnClickListener(new View.OnClickListener() {
             @Override

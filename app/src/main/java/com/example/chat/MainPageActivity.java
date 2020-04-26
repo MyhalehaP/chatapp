@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 
 import com.example.chat.Chat.ChatListAdapter;
@@ -43,6 +44,8 @@ public class MainPageActivity extends AppCompatActivity {
     public Button mLogOut, mFindUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        this.getSupportActionBar().hide();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
